@@ -1,80 +1,74 @@
-const newReleaseContent = document.getElementById("minhalista-content")
+const newReleaseContent = document.getElementById("card-content")
 
-
-async function pegarConteudoServidor(){
-
-        try {
-            const resposta = await fetch ('http://localhost:4567')
-            const respostaJson = await resposta.json()            
-
-            //console.log(respostaJson)
-            //mostrar(respostaJson)
-        
-        } catch (error) {
-        console.error(error)  
-        }
-        }
-
-//pegarConteudoServidor()
-
-
-async function lancamentosTmdb(){
-    const apiKey = "1bc41798a62df7a63e79daa9f7a1c80c"
-    const lancamentosUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key="+ apiKey + "&language=en-US&page=1"
-    await fetch(lancamentosUrl)
-    .then( response =>{
-        return response.json()      
-    })
-    .then(data =>{
-        let res = data.results
-        console.log(res)
-        })
-    //console.log(resposta)
-        
-}
-
-//lancamentosTmdb()
-
-
-async function listaTmdb(){
-    const apiKey = "1bc41798a62df7a63e79daa9f7a1c80c"
-    const listaUrl = "https://api.themoviedb.org/4/list/7107496?page=1&api_key="+ apiKey + "&sort_by=title.asc&language=en-US"
-
+async function ChamarServidor(){
+  
+     const response = await fetch('http://localhost:4567')
+     const data = await response.json()
+     
+     //console.log(data)
+     exibirHome(data)
+ }
  
-     await fetch(listaUrl)
-    .then( response =>{
-        return response.json()      
-    })
-    .then(data =>{
-        let res = data.results
-        console.log(res)
-        for(var i = 0; i < 10; i++){
-            let newReleaseMovie = document.createElement("div")
-            let newMovieTitle = document.createElement("h5")
-            let newMovieImg = document.createElement("img")
+ ChamarServidor()
 
-            // dar classe aos elementos criados
-            newReleaseMovie.className = 'movie'
-            newMovieTitle.className = 'movie-title'
-            newMovieImg.className = 'movie-img'
 
-            // colocar titulo
-            newMovieTitle.innerHTML = res[i].original_title
-
-            //colocar imagem
-            newMovieImg.src = "https://image.tmdb.org/t/p/w200" + res[i].poster_path
-
-            //append no html
-            newReleaseMovie.appendChild(newMovieImg)
-            newReleaseMovie.appendChild(newMovieTitle)
-            newReleaseContent.appendChild(newReleaseMovie)
-
-        }
-        })
-    .catch(err => {
-        console.log(err)
-    })
+ function exibirHome(data){
+    let res = data.results
+    //console.log(res)
+    for(var i = 0; i < 10; i++){
+        let novoCard = document.createElement("div")
+        let pontuacao = document.createElement("h4")
+        let novoCardImg = document.createElement("div")
+        let novaImg = document.createElement("img")
+        let novaImgBlur = document.createElement("img")
+        let novoCardText = document.createElement("div")
+        let novoCardTitulo = document.createElement("h2")
+        let novoResumo = document.createElement("p")
+        let linkPageFilme = document.createElement('a')
         
-}
 
-listaTmdb()
+        // dar classe aos elementos criados
+        novoCard.className = 'card'
+        novoCardImg.className = 'card-img'
+        novoCardText.className = 'card-text'
+        novoCardTitulo.className = 'movie-title'
+        novaImg.className = 'movie-img'
+        novaImgBlur.className = 'blur'
+
+        // colocar titulo
+        novoCardTitulo.innerHTML = res[i].original_title
+
+        //colocar imagem
+        novaImg.src = "https://image.tmdb.org/t/p/w200" + res[i].poster_path
+        novaImgBlur.src = "https://image.tmdb.org/t/p/w200" + res[i].poster_path
+
+        // colocar pontuacao
+        pontuacao.innerHTML = res[i].vote_average
+
+        // colocar sinopse
+        novoResumo.innerHTML = res[i].overview, 100
+
+        //colocar link para pagina do filme
+        linkPageFilme.href = "/pages/"+res[i].id+"page.html"
+
+        //append no html
+        
+        novoCard.appendChild(pontuacao)
+        novoCard.appendChild(novoCardImg)
+        novoCardImg.appendChild(novaImg)
+        novoCardImg.appendChild(novaImgBlur)
+        novoCardText.appendChild(novoCardTitulo)
+        novoCardText.appendChild(novoResumo)
+        novoCard.appendChild(novoCardTitulo)
+        novoCard.appendChild(novoCardText)
+            
+        newReleaseContent.appendChild(linkPageFilme)
+        linkPageFilme.appendChild(novoCard)
+
+       
+    }
+    }
+
+   
+    
+    
