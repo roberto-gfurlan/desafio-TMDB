@@ -9,15 +9,6 @@ async function loadComments(){
     exibirComentarios(data)
 }
 
-async function pegarComentarioFeito(){
-  
-    const response = await fetch('http://localhost:4567/insert')
-    const data = await response.json()
-    
-    console.log(data)
-    //exibirComentarios(data)
-}
-
 
 
 function exibirComentarios(data){
@@ -51,23 +42,41 @@ function exibirComentarios(data){
 
 }
 
-
 function pegarDados(){
+    let inputNome = document.getElementById("name").value;
+    let inputMensagem = document.getElementById('message').value
+    
+    fetch("http://localhost:5500/comentarios.html", {
+       method: 'POST',
+       headers: {
+          'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({
+          nome: inputNome,
+          comentario: inputMensagem,
+       
+       })
+    })
+    
 
-    let nome = document.getElementById('name').value
-    let comentario = document.getElementById('message').value
-
-    const insertComment = {
-        nome: `${nome}`,
-        comentario: `${comentario}`
-    }
-    return insertComment
 }
 
 
-module.exports = { pegarDados}
+/* function insertComent(){
+    var xhttp = new XMLHttpRequest()
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
 
+        }
+    }
+    let inputNome = document.getElementById("name").value;
+    let inputMensagem = document.getElementById('message').value
 
+    xhttp.open("POST", '/insert', true)
+    xhttp.setRequestHeader("Content-Type", "application/json")
+    xhttp.send('{"nome":"'+inputNome+'","comentario":"'+inputMensagem+'" }')
+
+}  */
 
 
 

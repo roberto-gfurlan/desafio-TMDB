@@ -1,0 +1,14 @@
+<div class="container">
+<h3>Lista de Comentarios</h3>
+
+{{#each Pegarcomentarios}}
+    <div class="comentario-display">
+    Nome: {{nome}}<br>
+    Comentario: {{comentario}}<br>
+    Cadastrado:{{#formatDate createdAt}} {{/formatDate}} <br>
+   
+    </div>
+    
+    
+{{/each}}
+</div>

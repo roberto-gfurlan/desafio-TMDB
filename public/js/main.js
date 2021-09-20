@@ -1,16 +1,20 @@
+
 const newReleaseContent = document.getElementById("card-content")
 
 async function ChamarServidor(){
   
-     const response = await fetch('http://localhost:4567')
-     const data = await response.json()
-     
-     //console.log(data)
-     exibirHome(data)
- }
- 
- ChamarServidor()
+     const data = await axios(`https://api.themoviedb.org/4/list/7107496?api_key=1bc41798a62df7a63e79daa9f7a1c80c&language=en-US&page=1&include_adult=false`) 
+     .then((response) => {
+        //console.log(response.data)
+        const dataApi = response.data
+        //console.log(dataApi)
+        exibirHome(dataApi)
+            
 
+      })
+
+ }
+ChamarServidor()
 
  function exibirHome(data){
     let res = data.results
@@ -49,7 +53,7 @@ async function ChamarServidor(){
         novoResumo.innerHTML = res[i].overview, 100
 
         //colocar link para pagina do filme
-        linkPageFilme.href = "/pages/"+res[i].id+"page.html"
+        linkPageFilme.href = res[i].id+"page"
 
         //append no html
         
@@ -70,5 +74,3 @@ async function ChamarServidor(){
     }
 
    
-    
-    
