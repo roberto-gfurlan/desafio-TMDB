@@ -27,7 +27,7 @@ Dependencias usadas:
 
 Para usar vc precisa do [Node.js](https://nodejs.org/) v10+, Mysql 8 e o Workbench.
 
-1- instale as dependecias que serão usadas e estão dentro do package.json.
+1- instale as dependecias que serão usadas que estão listadas no package.json.
 
 ```sh
 cd desafio-TMDB
@@ -45,7 +45,7 @@ CREATE TABLE `banco_comentarios`.`comentarios` (
   `data` DATETIME NOT NULL DEFAULT 'CURRENT_TIMESTAMP',
   PRIMARY KEY (`id`));
 ```
-3- dentro da pasta MODELS>db.js, vc pode atualizar a função sequelize com os dados da sua conexão mysql
+3- dentro da pasta _MODELS > db.js_, atualize a função _sequelize_ com os dados da sua conexão ao banco de dados
 
 ```sh
 const sequelize = new Sequelize('banco_comentarios', 'root', 'password', {
@@ -54,7 +54,7 @@ const sequelize = new Sequelize('banco_comentarios', 'root', 'password', {
   });
 ```
 
-3- pronto! Agora é só rodar 🎉
+3- pronto! Agora é só rodar 🎉 e abrir no localhost:8080
 ```sh
 npm start
 Servidor iniciando na porta 8088
