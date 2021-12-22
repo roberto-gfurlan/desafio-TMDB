@@ -154,6 +154,12 @@ body {
     position:relative;
   }
   
+  .card-text p {
+    max-height: 243px;
+    tex-overflow: ellipis;
+    overflow: hidden;
+}
+
   .btn{
     min-width:60px;
     margin:auto 30px;
@@ -182,7 +188,7 @@ body {
     justify-content:center;
     background:rgb(242,243,248);
     width:100%;
-    height:85vh;
+    height:90vh;
     overflow:hidden;
   }
   

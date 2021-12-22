@@ -50,7 +50,7 @@ ChamarServidor()
         pontuacao.innerHTML = res[i].vote_average
 
         // colocar sinopse
-        novoResumo.innerHTML = res[i].overview, 100
+        novoResumo.innerHTML = res[i].overview
 
         //colocar link para pagina do filme
         linkPageFilme.href = res[i].id+"page"
